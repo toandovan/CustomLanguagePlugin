@@ -34,6 +34,6 @@ public class VDLFileType extends LanguageFileType {
     @Nullable
     @Override
     public Icon getIcon() {
-        return SimpleIcons.ICON;
+        return VDLIcons.FILE;
     }
 }

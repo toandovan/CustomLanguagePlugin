@@ -23,7 +23,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Viettel Domain Language" implementationClass="com.example.intelijplugin.VDLFileType" fieldName="INSTANCE"
-                  language="VDL" extensions="simple"/>
-        
+                  language="VDL" extensions="VDL"/>
+
     </extensions>
 </idea-plugin>

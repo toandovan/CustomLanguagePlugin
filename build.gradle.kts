@@ -21,7 +21,7 @@ tasks {
     // Set the JVM compatibility versions
     patchPluginXml {
         sinceBuild.set("221")
-        untilBuild.set("222.*")
+        untilBuild.set("221.*")
     }
 
 //    instrumentCode {
