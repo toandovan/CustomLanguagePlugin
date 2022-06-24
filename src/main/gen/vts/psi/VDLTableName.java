@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface SimpleEntityDeclaration extends PsiElement {
-
-  @Nullable
-  SimpleTableName getTableName();
+public interface VDLTableName extends PsiElement {
 
   @NotNull
-  PsiElement getEntity();
+  PsiElement getIdentifier();
 
 }

@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface SimpleRelationType extends PsiElement {
+public interface VDLRelationshipDeclaration extends PsiElement {
+
+  @NotNull
+  PsiElement getApi();
 
 }

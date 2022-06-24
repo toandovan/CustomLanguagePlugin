@@ -7,24 +7,30 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static vts.psi.SimpleTypes.*;
+import static vts.psi.Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import vts.psi.*;
 
-public class SimpleRelationTypeImpl extends ASTWrapperPsiElement implements SimpleRelationType {
+public class VDLEntityBodyImpl extends ASTWrapperPsiElement implements VDLEntityBody {
 
-  public SimpleRelationTypeImpl(@NotNull ASTNode node) {
+  public VDLEntityBodyImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  public void accept(@NotNull SimpleVisitor visitor) {
-    visitor.visitRelationType(this);
+  public void accept(@NotNull VDLVisitor visitor) {
+    visitor.visitEntityBody(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof SimpleVisitor) accept((SimpleVisitor)visitor);
+    if (visitor instanceof VDLVisitor) accept((VDLVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<VDLEntityField> getEntityFieldList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, VDLEntityField.class);
   }
 
 }

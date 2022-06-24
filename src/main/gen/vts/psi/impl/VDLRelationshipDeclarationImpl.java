@@ -7,30 +7,30 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static vts.psi.SimpleTypes.*;
+import static vts.psi.Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import vts.psi.*;
 
-public class SimpleDtoDeclarationImpl extends ASTWrapperPsiElement implements SimpleDtoDeclaration {
+public class VDLRelationshipDeclarationImpl extends ASTWrapperPsiElement implements VDLRelationshipDeclaration {
 
-  public SimpleDtoDeclarationImpl(@NotNull ASTNode node) {
+  public VDLRelationshipDeclarationImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  public void accept(@NotNull SimpleVisitor visitor) {
-    visitor.visitDtoDeclaration(this);
+  public void accept(@NotNull VDLVisitor visitor) {
+    visitor.visitRelationshipDeclaration(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof SimpleVisitor) accept((SimpleVisitor)visitor);
+    if (visitor instanceof VDLVisitor) accept((VDLVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public PsiElement getDto() {
-    return findNotNullChildByType(DTO);
+  public PsiElement getApi() {
+    return findNotNullChildByType(API);
   }
 
 }

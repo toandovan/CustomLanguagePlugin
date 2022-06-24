@@ -7,30 +7,30 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static vts.psi.SimpleTypes.*;
+import static vts.psi.Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import vts.psi.*;
 
-public class SimpleEntityFieldImpl extends ASTWrapperPsiElement implements SimpleEntityField {
+public class VDLTableNameImpl extends ASTWrapperPsiElement implements VDLTableName {
 
-  public SimpleEntityFieldImpl(@NotNull ASTNode node) {
+  public VDLTableNameImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  public void accept(@NotNull SimpleVisitor visitor) {
-    visitor.visitEntityField(this);
+  public void accept(@NotNull VDLVisitor visitor) {
+    visitor.visitTableName(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof SimpleVisitor) accept((SimpleVisitor)visitor);
+    if (visitor instanceof VDLVisitor) accept((VDLVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public List<SimpleEntityValidate> getEntityValidateList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, SimpleEntityValidate.class);
+  public PsiElement getIdentifier() {
+    return findNotNullChildByType(IDENTIFIER);
   }
 
 }

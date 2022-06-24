@@ -24,6 +24,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Viettel Domain Language" implementationClass="com.example.intelijplugin.VDLFileType" fieldName="INSTANCE"
                   language="VDL" extensions="VDL"/>
-
+        <lang.parserDefinition
+                language="VDL"
+                implementationClass="com.example.intelijplugin.VDLParserDefinition"/>
     </extensions>
 </idea-plugin>

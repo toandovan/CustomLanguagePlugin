@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface SimpleDtoDeclaration extends PsiElement {
+public interface VDLEntityBody extends PsiElement {
 
   @NotNull
-  PsiElement getDto();
+  List<VDLEntityField> getEntityFieldList();
 
 }

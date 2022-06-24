@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface SimpleEntityField extends PsiElement {
-
-  @NotNull
-  List<SimpleEntityValidate> getEntityValidateList();
+public interface VDLRelationType extends PsiElement {
 
 }
