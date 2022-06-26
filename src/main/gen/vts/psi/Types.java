@@ -18,30 +18,30 @@ public interface Types {
   IElementType RELATIONSHIP_DECLARATION = new ElementType("RELATIONSHIP_DECLARATION");
   IElementType RELATION_TYPE = new ElementType("RELATION_TYPE");
   IElementType TABLE_NAME = new ElementType("TABLE_NAME");
+  IElementType TYPE = new ElementType("TYPE");
 
   IElementType API = new TokenType("API");
-  IElementType BLOCK_CMT = new TokenType("BLOCK_CMT");
   IElementType COMMA = new TokenType(",");
+  IElementType COMMENT = new TokenType("COMMENT");
+  IElementType DOUBLE = new TokenType("DOUBLE");
   IElementType DTO = new TokenType("DTO");
   IElementType ENTITY = new TokenType("ENTITY");
-  IElementType EOF = new TokenType("EOF");
-  IElementType ID = new TokenType("ID");
   IElementType IDENTIFIER = new TokenType("IDENTIFIER");
+  IElementType INTERGER = new TokenType("INTERGER");
   IElementType LB = new TokenType("(");
+  IElementType LONG = new TokenType("LONG");
   IElementType LP = new TokenType("{");
   IElementType LSB = new TokenType("[");
-  IElementType MANYTOMANY = new TokenType("ManyToMany");
-  IElementType MANYTOONE = new TokenType("ManyToOne");
-  IElementType ONETOMANY = new TokenType("OneToMany");
-  IElementType ONETOONE = new TokenType("OneToOne");
+  IElementType MANYTOMANY = new TokenType("MANYTOMANY");
+  IElementType MANYTOONE = new TokenType("MANYTOONE");
+  IElementType ONETOMANY = new TokenType("ONETOMANY");
+  IElementType ONETOONE = new TokenType("ONETOONE");
   IElementType RB = new TokenType(")");
-  IElementType RELATIONSHIP = new TokenType("RELATIONSHIP");
-  IElementType REQUIRE = new TokenType("require");
+  IElementType REQUIRE = new TokenType("REQUIRE");
   IElementType RP = new TokenType("}");
   IElementType RSB = new TokenType("]");
   IElementType SEMI = new TokenType(";");
-  IElementType TYPE = new TokenType("type");
-  IElementType UNIQUE = new TokenType("unique");
+  IElementType UNIQUE = new TokenType("UNIQUE");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -69,6 +69,9 @@ public interface Types {
       }
       else if (type == TABLE_NAME) {
         return new VDLTableNameImpl(node);
+      }
+      else if (type == TYPE) {
+        return new VDLTypeImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

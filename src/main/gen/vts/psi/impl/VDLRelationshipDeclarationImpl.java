@@ -27,10 +27,4 @@ public class VDLRelationshipDeclarationImpl extends ASTWrapperPsiElement impleme
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getApi() {
-    return findNotNullChildByType(API);
-  }
-
 }

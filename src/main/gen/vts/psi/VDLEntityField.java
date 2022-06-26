@@ -10,4 +10,10 @@ public interface VDLEntityField extends PsiElement {
   @NotNull
   List<VDLEntityValidate> getEntityValidateList();
 
+  @NotNull
+  VDLType getType();
+
+  @NotNull
+  PsiElement getIdentifier();
+
 }

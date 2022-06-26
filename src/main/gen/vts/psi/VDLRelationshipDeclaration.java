@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface VDLRelationshipDeclaration extends PsiElement {
 
-  @NotNull
-  PsiElement getApi();
-
 }

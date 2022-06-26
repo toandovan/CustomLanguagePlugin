@@ -27,5 +27,9 @@
         <lang.parserDefinition
                 language="VDL"
                 implementationClass="com.example.intelijplugin.VDLParserDefinition"/>
+
+        <lang.syntaxHighlighterFactory
+                language="VDL"
+                implementationClass="com.example.intelijplugin.VDLSyntaxHighlighterFactory"/>
     </extensions>
 </idea-plugin>

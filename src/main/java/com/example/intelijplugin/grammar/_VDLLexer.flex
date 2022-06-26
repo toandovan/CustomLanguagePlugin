@@ -1,4 +1,4 @@
-package vts.lexer;
+package com.example.intelijplugin.grammar;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
@@ -27,41 +27,36 @@ WHITE_SPACE=\s+
 
 IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 WHITE_SPACE=[ \t\n\x0B\f\r]+
-ENTITY= ENTITY | entity
-API= API | api
-DTO= DTO | dto
-RELATIONSHIP= RELATIONSHIP | relationship
-BLOCK_CMT= "/"* .*? *"/"
+COMMENT= "/"* .*? *"/"
 
 %%
 <YYINITIAL> {
-  {WHITE_SPACE}       { return WHITE_SPACE; }
+  {WHITE_SPACE}      { return WHITE_SPACE; }
 
-  "("                 { return LB; }
-  ")"                 { return RB; }
-  "{"                 { return LP; }
-  "}"                 { return RP; }
-  ";"                 { return SEMI; }
-  "["                 { return LSB; }
-  "]"                 { return RSB; }
-  ","                 { return COMMA; }
-  "OneToOne"          { return ONETOONE; }
-  "OneToMany"         { return ONETOMANY; }
-  "ManyToOne"         { return MANYTOONE; }
-  "ManyToMany"        { return MANYTOMANY; }
-  "require"           { return REQUIRE; }
-  "unique"            { return UNIQUE; }
-  "EOF"               { return EOF; }
-  "ID"                { return ID; }
-  "type"              { return TYPE; }
+  "("                { return LB; }
+  ")"                { return RB; }
+  "{"                { return LP; }
+  "}"                { return RP; }
+  ";"                { return SEMI; }
+  "["                { return LSB; }
+  "]"                { return RSB; }
+  ","                { return COMMA; }
+  "ENTITY"           { return ENTITY; }
+  "ONETOMANY"        { return ONETOMANY; }
+  "ONETOONE"         { return ONETOONE; }
+  "MANYTOMANY"       { return MANYTOMANY; }
+  "MANYTOONE"        { return MANYTOONE; }
+  "REQUIRE"          { return REQUIRE; }
+  "UNIQUE"           { return UNIQUE; }
+  "INTERGER"         { return INTERGER; }
+  "DOUBLE"           { return DOUBLE; }
+  "LONG"             { return LONG; }
+  "API"              { return API; }
+  "DTO"              { return DTO; }
 
-  {IDENTIFIER}        { return IDENTIFIER; }
-  {WHITE_SPACE}       { return WHITE_SPACE; }
-  {ENTITY}            { return ENTITY; }
-  {API}               { return API; }
-  {DTO}               { return DTO; }
-  {RELATIONSHIP}      { return RELATIONSHIP; }
-  {BLOCK_CMT}         { return BLOCK_CMT; }
+  {IDENTIFIER}       { return IDENTIFIER; }
+  {WHITE_SPACE}      { return WHITE_SPACE; }
+  {COMMENT}          { return COMMENT; }
 
 }
 

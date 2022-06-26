@@ -27,10 +27,4 @@ public class VDLDtoDeclarationImpl extends ASTWrapperPsiElement implements VDLDt
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getDto() {
-    return findNotNullChildByType(DTO);
-  }
-
 }

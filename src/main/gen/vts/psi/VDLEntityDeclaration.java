@@ -8,9 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface VDLEntityDeclaration extends PsiElement {
 
   @Nullable
+  VDLEntityBody getEntityBody();
+
+  @Nullable
   VDLTableName getTableName();
 
   @NotNull
-  PsiElement getEntity();
+  PsiElement getIdentifier();
 
 }

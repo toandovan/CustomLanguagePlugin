@@ -29,14 +29,20 @@ public class VDLEntityDeclarationImpl extends ASTWrapperPsiElement implements VD
 
   @Override
   @Nullable
+  public VDLEntityBody getEntityBody() {
+    return findChildByClass(VDLEntityBody.class);
+  }
+
+  @Override
+  @Nullable
   public VDLTableName getTableName() {
     return findChildByClass(VDLTableName.class);
   }
 
   @Override
   @NotNull
-  public PsiElement getEntity() {
-    return findNotNullChildByType(ENTITY);
+  public PsiElement getIdentifier() {
+    return findNotNullChildByType(IDENTIFIER);
   }
 
 }
