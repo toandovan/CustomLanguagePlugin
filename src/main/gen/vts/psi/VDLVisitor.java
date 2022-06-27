@@ -39,6 +39,10 @@ public class VDLVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitType(@NotNull VDLType o) {
+    visitPsiElement(o);
+  }
+
   public void visitPsiElement(@NotNull PsiElement o) {
     visitElement(o);
   }

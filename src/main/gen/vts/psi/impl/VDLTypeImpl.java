@@ -11,38 +11,20 @@ import static vts.psi.Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import vts.psi.*;
 
-public class VDLEntityFieldImpl extends ASTWrapperPsiElement implements VDLEntityField {
+public class VDLTypeImpl extends ASTWrapperPsiElement implements VDLType {
 
-  public VDLEntityFieldImpl(@NotNull ASTNode node) {
+  public VDLTypeImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VDLVisitor visitor) {
-    visitor.visitEntityField(this);
+    visitor.visitType(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof VDLVisitor) accept((VDLVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<VDLEntityValidate> getEntityValidateList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, VDLEntityValidate.class);
-  }
-
-  @Override
-  @NotNull
-  public VDLType getType() {
-    return findNotNullChildByClass(VDLType.class);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
   }
 
 }

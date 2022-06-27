@@ -17,7 +17,7 @@ import vts.psi.Types;
 
 public class VDLParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-//    public static final TokenSet COMMENTS = TokenSet.create(Type.COMMENT);
+    public static final TokenSet COMMENTS = TokenSet.create(Types.COMMENT);
     public static final IFileElementType FILE = new IFileElementType(VDLLanguage.INSTANCE);
     @Override
     public @NotNull Lexer createLexer(Project project) {
@@ -30,13 +30,18 @@ public class VDLParserDefinition implements ParserDefinition {
     }
 
     @Override
+    public @NotNull TokenSet getWhitespaceTokens() {
+        return WHITE_SPACES;
+    }
+
+    @Override
     public @NotNull IFileElementType getFileNodeType() {
         return FILE;
     }
 
     @Override
     public @NotNull TokenSet getCommentTokens() {
-        return null;
+        return COMMENTS;
     }
 
     @Override

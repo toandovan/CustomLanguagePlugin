@@ -73,28 +73,17 @@ public class Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ENTITY IDENTIFIER* table_name?
+  // ENTITY IDENTIFIER table_name? entity_body?
   public static boolean entity_declaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entity_declaration")) return false;
     if (!nextTokenIs(b, ENTITY)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, ENTITY);
-    r = r && entity_declaration_1(b, l + 1);
+    r = consumeTokens(b, 0, ENTITY, IDENTIFIER);
     r = r && entity_declaration_2(b, l + 1);
+    r = r && entity_declaration_3(b, l + 1);
     exit_section_(b, m, ENTITY_DECLARATION, r);
     return r;
-  }
-
-  // IDENTIFIER*
-  private static boolean entity_declaration_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_declaration_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!consumeToken(b, IDENTIFIER)) break;
-      if (!empty_element_parsed_guard_(b, "entity_declaration_1", c)) break;
-    }
-    return true;
   }
 
   // table_name?
@@ -104,14 +93,22 @@ public class Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
+  // entity_body?
+  private static boolean entity_declaration_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "entity_declaration_3")) return false;
+    entity_body(b, l + 1);
+    return true;
+  }
+
   /* ********************************************************** */
-  // ID type entity_validate* SEMI
+  // IDENTIFIER type entity_validate* SEMI
   public static boolean entity_field(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entity_field")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, ID, TYPE);
+    r = consumeToken(b, IDENTIFIER);
+    r = r && type(b, l + 1);
     r = r && entity_field_2(b, l + 1);
     r = r && consumeToken(b, SEMI);
     exit_section_(b, m, ENTITY_FIELD, r);
@@ -130,7 +127,7 @@ public class Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // REQUIRE | UNIQUE
+  // require | unique
   public static boolean entity_validate(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entity_validate")) return false;
     if (!nextTokenIs(b, "<entity validate>", REQUIRE, UNIQUE)) return false;
@@ -143,31 +140,20 @@ public class Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (entity_declaration|relationship_declaration |dto_declaration)* EOF
+  // (entity_declaration|relationship_declaration |dto_declaration)*
   static boolean program(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "program")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = program_0(b, l + 1);
-    r = r && consumeToken(b, EOF);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (entity_declaration|relationship_declaration |dto_declaration)*
-  private static boolean program_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "program_0")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!program_0_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "program_0", c)) break;
+      if (!program_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "program", c)) break;
     }
     return true;
   }
 
   // entity_declaration|relationship_declaration |dto_declaration
-  private static boolean program_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "program_0_0")) return false;
+  private static boolean program_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "program_0")) return false;
     boolean r;
     r = entity_declaration(b, l + 1);
     if (!r) r = relationship_declaration(b, l + 1);
@@ -176,15 +162,15 @@ public class Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ONETOMANY | ONETOONE | MANYTOMANY |MANYTOONE
+  // OneToOne | OneToMany | ManyToOne | ManyToMany
   public static boolean relation_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "relation_type")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, RELATION_TYPE, "<relation type>");
-    r = consumeToken(b, ONETOMANY);
-    if (!r) r = consumeToken(b, ONETOONE);
-    if (!r) r = consumeToken(b, MANYTOMANY);
+    r = consumeToken(b, ONETOONE);
+    if (!r) r = consumeToken(b, ONETOMANY);
     if (!r) r = consumeToken(b, MANYTOONE);
+    if (!r) r = consumeToken(b, MANYTOMANY);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -210,6 +196,20 @@ public class Parser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeTokens(b, 0, LSB, IDENTIFIER, RSB);
     exit_section_(b, m, TABLE_NAME, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // Interger | Double | Long | String
+  public static boolean type(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, TYPE, "<type>");
+    r = consumeToken(b, INTERGER);
+    if (!r) r = consumeToken(b, DOUBLE);
+    if (!r) r = consumeToken(b, LONG);
+    if (!r) r = consumeToken(b, STRING);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

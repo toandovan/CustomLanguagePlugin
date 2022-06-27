@@ -34,33 +34,24 @@
         LSB='['
         RSB=']'
         COMMA=','
-        ENTITY = 'regexp: ENTITY | entity'
-        API = 'regexp: API | api'
-        DTO = 'regexp: DTO | dto'
-        RELATIONSHIP = 'regexp: RELATIONSHIP | relationship'
-        ONETOONE = 'OneToOne'
-        ONETOMANY = 'OneToMany'
-        MANYTOONE = 'ManyToOne'
-        MANYTOMANY = 'ManyToMany'
-        REQUIRE = 'require'
-        UNIQUE = 'unique'
-        BLOCK_CMT ='regexp: /* .*? */'
+        COMMENT ='regexp: /* .*? */'
     ]
 }
 
 
-program ::= (entity_declaration|relationship_declaration |dto_declaration)* EOF
+program ::= (entity_declaration|relationship_declaration |dto_declaration)*
 
 // api_declaration: API
-entity_declaration ::= ENTITY IDENTIFIER* table_name?
+entity_declaration ::= ENTITY IDENTIFIER table_name? entity_body?
 table_name ::= LSB IDENTIFIER RSB
 entity_body::= LP entity_field* RP
-entity_field::= ID type entity_validate* SEMI
-relation_type::= ONETOMANY | ONETOONE | MANYTOMANY |MANYTOONE
-entity_validate::= REQUIRE | UNIQUE
-
+entity_field::= IDENTIFIER type entity_validate* SEMI
+relation_type::= OneToOne | OneToMany | ManyToOne | ManyToMany
+entity_validate::= require | unique
+type::= Interger | Double | Long | String
 relationship_declaration::= API
 dto_declaration::= DTO
+
 
 
 
